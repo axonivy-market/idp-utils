@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * The percentage is only returned if it is written on the document, i.e. it is not calculated.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
 public class EarlyPaymentBenefitDiscountPercentage {
   @JsonProperty("validation_problem")
   private Boolean validationProblem = false;

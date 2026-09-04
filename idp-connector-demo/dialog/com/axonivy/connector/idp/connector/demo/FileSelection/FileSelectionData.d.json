@@ -1,0 +1,48 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "FileSelectionData",
+  "namespace" : "com.axonivy.connector.idp.connector.demo.FileSelection",
+  "fields" : [ {
+    "name" : "demo",
+    "type" : "com.axonivy.connector.idp.demo.Demo",
+    "modifiers" : [ ]
+  }, {
+    "name" : "uploadedFile",
+    "type" : "org.primefaces.model.file.UploadedFile",
+    "modifiers" : [ ]
+  }, {
+    "name" : "sampleFiles",
+    "type" : "java.util.List<com.axonivy.connector.idp.demo.SampleFile>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "file",
+    "type" : "File",
+    "modifiers" : [ ]
+  }, {
+    "name" : "selectedSampleFile",
+    "type" : "com.axonivy.connector.idp.demo.SampleFile",
+    "modifiers" : [ ]
+  }, {
+    "name" : "workflowId",
+    "modifiers" : [ ]
+  }, {
+    "name" : "processingResultNode",
+    "type" : "com.fasterxml.jackson.databind.JsonNode",
+    "modifiers" : [ ]
+  }, {
+    "name" : "processingId",
+    "type" : "java.util.UUID",
+    "modifiers" : [ ]
+  }, {
+    "name" : "error",
+    "modifiers" : [ ]
+  }, {
+    "name" : "retry",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  }, {
+    "name" : "retryTime",
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
+  } ]
+}

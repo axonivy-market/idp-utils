@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="jakarta.faces.core"
+	xmlns:h="jakarta.faces.html"
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="primefaces"
+	xmlns:pe="primefaces.extensions">
+<h:body>
+	<ui:composition template="/layouts/frame-10.xhtml">
+		<ui:define name="title">
+			<h:outputText value="2.Document Splitting" rendered="#{data.workflowType == 'DOCUMENT_SPLITTING'}"/>
+			<h:outputText value="2.Extraction" rendered="#{data.workflowType == 'EXTRACTION'}"/>
+		</ui:define>
+		<ui:define name="content">
+			<h:outputStylesheet name="layouts/styles/customStyle.css" />
+			<ic:com.axonivy.connector.idp.connector.IDPStandaloneUI
+				id="idpViewer" widgetVar="idpViewerWV"
+				documentId="#{data.processingId}"
+				workflowType="#{data.workflowType}" style="width:100%; height: calc(-95px + 100vh); border: 0;">
+			</ic:com.axonivy.connector.idp.connector.IDPStandaloneUI>
+			<h:form id="form">
+				<br/>
+				<div class="command-btns">
+					<p:commandLink id="cancel"
+						actionListener="#{ivyWorkflowView.cancel()}" process="@this"
+						value="Cancel" />
+					<p:commandButton id="save" value="Save" type="button"
+						onclick="PF('idpViewerWV').save()" icon="pi pi-save" />
+					<p:commandButton id="process" value="Proceed"
+						onclick="PF('idpViewerWV').save()" actionListener="#{logic.close}"
+						icon="pi pi-check" oncomplete="revokeShareToken()" />
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

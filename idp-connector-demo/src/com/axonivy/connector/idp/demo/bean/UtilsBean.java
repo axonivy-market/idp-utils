@@ -1,8 +1,10 @@
 package com.axonivy.connector.idp.demo.bean;
 
-import javax.faces.bean.ManagedBean;
+import jakarta.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class UtilsBean {
 
 	public String snakeCaseToWords(String snakeCase) {

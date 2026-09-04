@@ -1,0 +1,499 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "id" : "1920E8120D5609FC",
+  "config" : {
+    "data" : "com.axonivy.connector.idp.connector.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1480, "y" : 416 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "DialogCall",
+      "name" : "Splitting Result",
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.SplittingResult:start(java.util.UUID,com.fasterxml.jackson.databind.JsonNode)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.processingResult" : "in.processingResultNode"
+          },
+          "code" : [
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"3. Splitting Result\"); "
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 952, "y" : 415 },
+        "size" : { "width" : 124, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f23" }
+      ]
+    }, {
+      "id" : "f2",
+      "type" : "RequestStart",
+      "name" : "documentSplitting.ivp",
+      "config" : {
+        "signature" : "documentSplitting",
+        "input" : {
+          "map" : {
+            "out.workflowId" : "com.axonivy.connector.idp.connector.PrebuiltWorkfow.generic_splitting.toString()"
+          }
+        },
+        "request" : {
+          "name" : "Document Splitting"
+        },
+        "task" : {
+          "name" : "Document Splitting"
+        }
+      },
+      "tags" : [
+        "demo"
+      ],
+      "visual" : {
+        "at" : { "x" : 263, "y" : 416 }
+      },
+      "connect" : [
+        { "id" : "f47", "to" : "f39" }
+      ]
+    }, {
+      "id" : "f39",
+      "type" : "DialogCall",
+      "name" : "File Selection",
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,com.fasterxml.jackson.databind.JsonNode,java.util.UUID)",
+        "call" : {
+          "map" : {
+            "param.demo" : "com.axonivy.connector.idp.demo.Demo.SPLITTING_DOCUMENT",
+            "param.workflowId" : "in.workflowId"
+          },
+          "code" : [
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"1. File to be splitted\"); "
+          ]
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.file" : "result.file",
+            "out.processingId" : "result.processingId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 407, "y" : 416 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "Spliting Review",
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.ReviewDocumentProcessing:start(java.util.UUID,com.axonivy.connector.idp.connector.WorkflowType)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.workflowType" : "com.axonivy.connector.idp.connector.WorkflowType.DOCUMENT_SPLITTING"
+          },
+          "code" : [
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"2. Document Splitting\"); "
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 416 },
+        "size" : { "width" : 136, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f27" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "RequestStart",
+      "name" : "extraction.ivp",
+      "config" : {
+        "signature" : "exaction",
+        "input" : {
+          "map" : { },
+          "code" : "out.workflowId = ivy.var.idpConnectorDemo_workflowId;"
+        },
+        "request" : {
+          "name" : "Document Extraction"
+        }
+      },
+      "tags" : [
+        "demo"
+      ],
+      "visual" : {
+        "at" : { "x" : 263, "y" : 696 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f10" }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "DialogCall",
+      "name" : [
+        "Extraction",
+        "Result"
+      ],
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.ExtractionResult:start(java.util.UUID,com.fasterxml.jackson.databind.JsonNode,com.axonivy.connector.idp.demo.SampleFile)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.resultNode" : "in.processingResultNode",
+            "param.sampleFile" : "in.sampleFile"
+          },
+          "code" : [
+            "// set taskname",
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"3. Extraction Result\");"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 952, "y" : 695 },
+        "size" : { "width" : 124, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f28" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1479, "y" : 696 }
+      }
+    }, {
+      "id" : "f33",
+      "type" : "DialogCall",
+      "name" : [
+        "Open ",
+        "StandaloneUI"
+      ],
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.ReviewDocumentProcessing:start(java.util.UUID,com.axonivy.connector.idp.connector.WorkflowType)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.workflowType" : "com.axonivy.connector.idp.connector.WorkflowType.EXTRACTION"
+          },
+          "code" : [
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"2. Extraction\"); "
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 696 },
+        "size" : { "width" : 136, "height" : 62 },
+        "description" : [
+          "Open ",
+          "StandaloneUI",
+          "of Shared Document"
+        ]
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f9" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "SubProcessCall",
+      "name" : [
+        "Retrieve ",
+        "Extraction Result"
+      ],
+      "config" : {
+        "processCall" : "ProcessingService:retrieveResult(java.util.UUID)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.processingResultNode" : "result.resultsNode"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 775, "y" : 695 },
+        "size" : { "width" : 127, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f31", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f10",
+      "type" : "DialogCall",
+      "name" : "File Selection",
+      "config" : {
+        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,com.fasterxml.jackson.databind.JsonNode,java.util.UUID)",
+        "call" : {
+          "map" : {
+            "param.demo" : "com.axonivy.connector.idp.demo.Demo.EXTRACTION",
+            "param.workflowId" : "in.workflowId"
+          },
+          "code" : [
+            "// set taskname",
+            "import com.axonivy.connector.idp.demo.IDPDemoService;",
+            "IDPDemoService.setDemoTaskName(\"1. File selection\");"
+          ]
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.file" : "result.file",
+            "out.processingId" : "result.processingId",
+            "out.processingResultNode" : "result.processingResultNode",
+            "out.sampleFile" : "result.selectedFile"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 696 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f33" }
+      ]
+    }, {
+      "id" : "f34",
+      "type" : "RequestStart",
+      "name" : "workflows.ivp",
+      "config" : {
+        "signature" : "workflows",
+        "request" : {
+          "name" : "Log Workflow names",
+          "description" : "Fetch workflows of this IDP instance and log them to the log file.",
+          "isVisibleOnStartList" : false
+        }
+      },
+      "tags" : [
+        "demo"
+      ],
+      "visual" : {
+        "at" : { "x" : 263, "y" : 968 }
+      },
+      "connect" : [
+        { "id" : "f38", "to" : "f36" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 727, "y" : 968 }
+      }
+    }, {
+      "id" : "f36",
+      "type" : "RestClientCall",
+      "name" : "Load Workflows",
+      "config" : {
+        "target" : {
+          "clientId" : "IDP-Document-Capturing-API",
+          "path" : "/processing/workflows",
+          "templateParams" : {
+            "processing_id" : ""
+          },
+          "queryParams" : {
+            "wait_for" : "",
+            "locale" : "",
+            "limit" : ""
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.axonivy.connector.idp.connector.model.AvailableWorkflowResponse>",
+            "map" : {
+              "out.workflows" : "result"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 407, "y" : 968 }
+      },
+      "connect" : [
+        { "id" : "f42", "to" : "f40" }
+      ]
+    }, {
+      "id" : "f40",
+      "type" : "Script",
+      "name" : "Show workflows",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.idp.connector.model.AvailableWorkflowResponse;",
+            "",
+            "ivy.log.info(\"Found workflows: {0}\", in.workflows.size());",
+            "for(AvailableWorkflowResponse wf : in.workflows) {",
+            "  ivy.log.info(\"Workflow: {0} ({1})\", wf.name, wf.workflowId);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 583, "y" : 968 }
+      },
+      "connect" : [
+        { "id" : "f37", "to" : "f35" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "SubProcessCall",
+      "name" : [
+        "Retrieve ",
+        "Splitting Result"
+      ],
+      "config" : {
+        "processCall" : "ProcessingService:retrieveResult(java.util.UUID)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.error" : "result.#error",
+            "out.processingResultNode" : "result.#resultsNode"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 776, "y" : 415 },
+        "size" : { "width" : 127, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f25", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f0",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "You can change the workflow that processes the document in:",
+        " - variables.yaml",
+        " - Engine Cockpit > Configuration > Variables"
+      ],
+      "visual" : {
+        "at" : { "x" : 376, "y" : 560 },
+        "size" : { "width" : 336, "height" : 88 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "SubProcessCall",
+      "name" : "Validation",
+      "config" : {
+        "processCall" : "ValidationService:validate(java.util.UUID,Double)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.confidenceMinValue" : "in.confidenceMinValue"
+          },
+          "code" : "ivy.log.info(\"Start.. Validation processingId={0},confidenceMinValue={1}\", in.processingId, in.confidenceMinValue);"
+        },
+        "output" : {
+          "code" : [
+            "String resultStr = result.passed ? \"PASSED\" : \"NOT PASSED\" ;",
+            "ivy.log.info(\"Validation processingId={0}, confidenceMinValue={1} : result={2}\", out.processingId, out.confidenceMinValue, resultStr);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1351, "y" : 415 },
+        "size" : { "width" : 127, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "SubProcessCall",
+      "name" : "Validation",
+      "config" : {
+        "processCall" : "ValidationService:validate(java.util.UUID,Double)",
+        "call" : {
+          "map" : {
+            "param.processingId" : "in.processingId",
+            "param.confidenceMinValue" : "in.confidenceMinValue"
+          }
+        },
+        "output" : {
+          "code" : [
+            "String resultStr = result.passed ? \"PASSED\" : \"NOT PASSED\" ;",
+            "ivy.log.info(\"Validation processingId={0}, confidenceMinValue={1} : result={2}\", in.processingId, in.confidenceMinValue, resultStr);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1350, "y" : 695 },
+        "size" : { "width" : 127, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f22", "to" : "f20" }
+      ]
+    }, {
+      "id" : "f23",
+      "type" : "Script",
+      "name" : "Set confidenceMinValue",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.idp.connector.model.AvailableWorkflowResponse;",
+            "",
+            "ivy.log.info(\"Found workflows: {0}\", in.workflows.size());",
+            "for(AvailableWorkflowResponse wf : in.workflows) {",
+            "  ivy.log.info(\"Workflow: {0} ({1})\", wf.name, wf.workflowId);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1152, "y" : 416 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f28",
+      "type" : "Script",
+      "name" : "Set confidenceMinValue",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.idp.connector.model.AvailableWorkflowResponse;",
+            "",
+            "ivy.log.info(\"Found workflows: {0}\", in.workflows.size());",
+            "for(AvailableWorkflowResponse wf : in.workflows) {",
+            "  ivy.log.info(\"Workflow: {0} ({1})\", wf.name, wf.workflowId);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1152, "y" : 696 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f12" }
+      ]
+    } ]
+}

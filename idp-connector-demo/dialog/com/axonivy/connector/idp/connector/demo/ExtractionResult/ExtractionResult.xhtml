@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core"
+  xmlns:h="jakarta.faces.html" xmlns:ui="jakarta.faces.facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="primefaces"
+  xmlns:pe="primefaces.extensions">
+<h:body>
+	<ui:composition template="/layouts/frame-10.xhtml">
+		<ui:define name="title">
+			<h:outputText value="3. Extraction Result"/>
+		</ui:define>
+		<ui:define name="content">
+			<script>
+				window.isHideTaskName = true;
+				window.isHideTaskAction = true;
+				window.isHideCaseInfo = true;
+			</script>
+			<h:outputStylesheet name="layouts/styles/customStyle.css" />
+			<h:form id="form">
+				<p:messages />
+				<p:panelGrid id="maingrid" columns="2" columnClasses="ui-grid-col-7,ui-grid-col-5" layout="grid" styleClass="ui-panelgrid-blank">
+					<h:panelGroup>
+						<p:tabView id="result">
+							<p:tab title="Results" style="height:100%">
+								<div class="ui-g"  style="max-height: calc(-163px + 100vh); overflow-x: hidden; overflow-y: auto;">
+								<h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/connector/idp/connector/demo/ExtractionResult/IntroText')}"/>
+								<div class="formgrid grid align-items-baseline ui-fluid">
+									<ui:repeat var="extraction" value="#{data.extractions}">
+										<!-- row -->
+										<div class="field col-12 md:col-5 p-text-left p-text-md-right">
+											<h:outputText value="#{utilsBean.snakeCaseToWords(extraction.name)}" />
+										</div>
+										<div class="field col-12 md:col-7">
+											<p:inputText value="#{extraction.extraction.value}" readonly="true"/>
+										</div>
+									</ui:repeat>
+								</div>
+								<div>
+									<strong>Line Items</strong><br/>
+									<p:dataTable id="lineItemTable" 
+										value="#{data.lineItems}" var="row">
+										<p:columns value="#{data.lineItemHeader}" var="col" columnIndexVar="index"
+											width="#{col.contains('Description') ? 2 : 1}">
+											<f:facet name="header">#{utilsBean.snakeCaseToWords(col)}</f:facet>
+											<h:outputText value="#{row[col]}"/>
+										</p:columns>
+									</p:dataTable>
+								</div>
+								</div>
+							</p:tab>
+							<p:tab title="JSON source" style="height:100%">
+								<div class="ui-fluid">
+									<div class="ui-g" style="max-height: calc(-163px + 100vh); width: 100%; overflow-x: auto; overflow-y: auto;">
+										<pre id="jsonResult">#{data.prettyJson}</pre>
+									</div>
+								</div>
+							</p:tab>
+						</p:tabView>
+					</h:panelGroup>
+					
+					<h:panelGroup width="100%" rendered="#{data.selectedSampleFile ne null}">
+						<p:tabView style="height:100%">
+							<p:tab style="height:100%" title="#{data.selectedSampleFile.name}">
+								<pe:documentViewer
+									value="#{data.selectedSampleFile.streamedContent}"
+									style="height:57vh; border: 0;">
+								</pe:documentViewer>
+							</p:tab>
+						</p:tabView>
+					</h:panelGroup>
+					<h:panelGroup width="100%">
+						<div class="command-btns">
+							<p:commandLink id="cancel"
+								actionListener="#{ivyWorkflowView.cancel()}" process="@this"
+								value="Cancel" />
+							<p:commandButton id="close" actionListener="#{logic.close}"
+								value="Close" update="form" icon="pi pi-times" />
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+						<!-- empty -->
+					</h:panelGroup>
+				</p:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
