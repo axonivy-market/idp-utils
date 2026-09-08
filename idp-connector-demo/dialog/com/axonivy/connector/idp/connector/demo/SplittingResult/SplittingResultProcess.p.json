@@ -138,8 +138,8 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.jsf.primefaces.stream.InputStreamSupplier;",
-            "import javax.faces.application.FacesMessage;",
-            "import javax.faces.context.FacesContext;",
+            "import jakarta.faces.application.FacesMessage;",
+            "import jakarta.faces.context.FacesContext;",
             "import java.io.FileInputStream;",
             "import org.primefaces.model.DefaultStreamedContent;",
             "",

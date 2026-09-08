@@ -98,9 +98,9 @@
         "output" : {
           "code" : [
             "import com.axonivy.connector.idp.connector.exception.RestException;",
-            "import javax.faces.application.FacesMessage;",
+            "import jakarta.faces.application.FacesMessage;",
             "import org.primefaces.component.inputtext.InputText;",
-            "import javax.faces.context.FacesContext;",
+            "import jakarta.faces.context.FacesContext;",
             "",
             "if (in.error.getErrorCode().equals(\"idp:error\")) {",
             "    RestException exception = in.error.getCause() as RestException;",
