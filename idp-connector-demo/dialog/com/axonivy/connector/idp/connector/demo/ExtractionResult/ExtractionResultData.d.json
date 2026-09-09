@@ -8,11 +8,11 @@
     "modifiers" : [ ]
   }, {
     "name" : "resultNode",
-    "type" : "com.fasterxml.jackson.databind.JsonNode",
+    "type" : "tools.jackson.databind.JsonNode",
     "modifiers" : [ ]
   }, {
     "name" : "extractionsNode",
-    "type" : "com.fasterxml.jackson.databind.JsonNode",
+    "type" : "tools.jackson.databind.JsonNode",
     "modifiers" : [ ]
   }, {
     "name" : "prettyJson",

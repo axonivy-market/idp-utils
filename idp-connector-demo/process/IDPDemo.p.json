@@ -15,7 +15,7 @@
       "type" : "DialogCall",
       "name" : "Splitting Result",
       "config" : {
-        "dialog" : "com.axonivy.connector.idp.connector.demo.SplittingResult:start(java.util.UUID,com.fasterxml.jackson.databind.JsonNode)",
+        "dialog" : "com.axonivy.connector.idp.connector.demo.SplittingResult:start(java.util.UUID,tools.jackson.databind.JsonNode)",
         "call" : {
           "map" : {
             "param.processingId" : "in.processingId",
@@ -62,7 +62,7 @@
       "type" : "DialogCall",
       "name" : "File Selection",
       "config" : {
-        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,com.fasterxml.jackson.databind.JsonNode,java.util.UUID)",
+        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,tools.jackson.databind.JsonNode,java.util.UUID)",
         "call" : {
           "map" : {
             "param.demo" : "com.axonivy.connector.idp.demo.Demo.SPLITTING_DOCUMENT",
@@ -137,7 +137,7 @@
         "Result"
       ],
       "config" : {
-        "dialog" : "com.axonivy.connector.idp.connector.demo.ExtractionResult:start(java.util.UUID,com.fasterxml.jackson.databind.JsonNode,com.axonivy.connector.idp.demo.SampleFile)",
+        "dialog" : "com.axonivy.connector.idp.connector.demo.ExtractionResult:start(java.util.UUID,tools.jackson.databind.JsonNode,com.axonivy.connector.idp.demo.SampleFile)",
         "call" : {
           "map" : {
             "param.processingId" : "in.processingId",
@@ -220,7 +220,7 @@
       "type" : "DialogCall",
       "name" : "File Selection",
       "config" : {
-        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,com.fasterxml.jackson.databind.JsonNode,java.util.UUID)",
+        "dialog" : "com.axonivy.connector.idp.connector.demo.FileSelection:start(com.axonivy.connector.idp.demo.Demo,String,tools.jackson.databind.JsonNode,java.util.UUID)",
         "call" : {
           "map" : {
             "param.demo" : "com.axonivy.connector.idp.demo.Demo.EXTRACTION",

@@ -15,7 +15,7 @@
           "params" : [
             { "name" : "demo", "type" : "com.axonivy.connector.idp.demo.Demo", "desc" : "" },
             { "name" : "workflowId", "type" : "String", "desc" : "" },
-            { "name" : "processingResultNode", "type" : "com.fasterxml.jackson.databind.JsonNode", "desc" : "" },
+            { "name" : "processingResultNode", "type" : "tools.jackson.databind.JsonNode", "desc" : "" },
             { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" }
           ],
           "map" : {
@@ -28,7 +28,7 @@
             { "name" : "file", "type" : "java.io.File", "desc" : "" },
             { "name" : "selectedFile", "type" : "com.axonivy.connector.idp.demo.SampleFile", "desc" : "" },
             { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" },
-            { "name" : "processingResultNode", "type" : "com.fasterxml.jackson.databind.JsonNode", "desc" : "" }
+            { "name" : "processingResultNode", "type" : "tools.jackson.databind.JsonNode", "desc" : "" }
           ],
           "map" : {
             "result.file" : "in.selectedSampleFile.getFile().getJavaFile()",

@@ -14,7 +14,7 @@
         "input" : {
           "params" : [
             { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" },
-            { "name" : "resultNode", "type" : "com.fasterxml.jackson.databind.JsonNode", "desc" : "" },
+            { "name" : "resultNode", "type" : "tools.jackson.databind.JsonNode", "desc" : "" },
             { "name" : "sampleFile", "type" : "com.axonivy.connector.idp.demo.SampleFile", "desc" : "" }
           ],
           "map" : {
@@ -25,10 +25,8 @@
           "code" : [
             "import com.axonivy.connector.idp.demo.utils.IDPDemoUtils;",
             "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "import com.fasterxml.jackson.databind.ObjectMapper;",
             "",
-            "ObjectMapper objectMapper = new ObjectMapper();",
-            "out.prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(param.resultNode);",
+            "out.prettyJson = param.resultNode.toPrettyString();",
             "",
             "out.extractionsNode = param.resultNode.get(\"extractions\");",
             "",

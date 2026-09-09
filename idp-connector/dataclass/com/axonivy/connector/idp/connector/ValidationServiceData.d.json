@@ -16,7 +16,7 @@
     "modifiers" : [ ]
   }, {
     "name" : "jsonNode",
-    "type" : "com.fasterxml.jackson.databind.JsonNode",
+    "type" : "tools.jackson.databind.JsonNode",
     "modifiers" : [ ]
   }, {
     "name" : "error",

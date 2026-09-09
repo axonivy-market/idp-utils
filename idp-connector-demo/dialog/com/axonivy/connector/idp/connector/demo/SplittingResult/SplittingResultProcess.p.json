@@ -14,7 +14,7 @@
         "input" : {
           "params" : [
             { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" },
-            { "name" : "processingResult", "type" : "com.fasterxml.jackson.databind.JsonNode", "desc" : "" }
+            { "name" : "processingResult", "type" : "tools.jackson.databind.JsonNode", "desc" : "" }
           ],
           "map" : {
             "out.processingId" : "param.processingId",
@@ -23,11 +23,8 @@
           "code" : [
             "import com.axonivy.connector.idp.demo.utils.IDPDemoUtils;",
             "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "import com.fasterxml.jackson.databind.ObjectMapper;",
             "",
-            "ObjectMapper objectMapper = new ObjectMapper();",
-            "",
-            "out.prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(param.processingResult);",
+            "out.prettyJson = param.processingResult.toPrettyString();",
             "out.subDocuments = IDPDemoUtils.toSubDocumentList(param.processingResult);",
             "",
             "IDPDemoService.createSubDocumentImages(out.processingId.toString(), out.subDocuments);"
