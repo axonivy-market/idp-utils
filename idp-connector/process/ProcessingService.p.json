@@ -83,7 +83,7 @@
         },
         "response" : {
           "entity" : {
-            "type" : "tools.jackson.databind.JsonNode",
+            "type" : "com.fasterxml.jackson.databind.JsonNode",
             "code" : [
               "import com.axonivy.connector.idp.connector.exception.RestException;",
               "import ch.ivyteam.ivy.bpm.error.BpmError;",
@@ -166,7 +166,7 @@
         },
         "response" : {
           "entity" : {
-            "type" : "tools.jackson.databind.JsonNode",
+            "type" : "com.fasterxml.jackson.databind.JsonNode",
             "code" : [
               "out.statusCode = response.getStatus();",
               "out.jsonNode = result;"
@@ -677,7 +677,7 @@
         },
         "response" : {
           "entity" : {
-            "type" : "tools.jackson.databind.JsonNode",
+            "type" : "com.fasterxml.jackson.databind.JsonNode",
             "map" : {
               "out.jsonNode" : "result"
             }

@@ -44,7 +44,6 @@
     "modifiers" : [ ]
   }, {
     "name" : "sampleFile",
-    "type" : "com.axonivy.connector.idp.demo.SampleFile",
-    "modifiers" : [ ]
+    "type" : "com.axonivy.connector.idp.demo.SampleFile"
   } ]
 }

@@ -8,7 +8,7 @@
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 1480, "y" : 416 }
+        "at" : { "x" : 1672, "y" : 416 }
       }
     }, {
       "id" : "f11",
@@ -20,16 +20,11 @@
           "map" : {
             "param.processingId" : "in.processingId",
             "param.processingResult" : "in.processingResultNode"
-          },
-          "code" : [
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"3. Splitting Result\"); "
-          ]
+          }
         }
       },
       "visual" : {
-        "at" : { "x" : 952, "y" : 415 },
+        "at" : { "x" : 1144, "y" : 415 },
         "size" : { "width" : 124, "height" : 63 }
       },
       "connect" : [
@@ -50,7 +45,7 @@
           "name" : "Document Splitting"
         },
         "task" : {
-          "name" : "Document Splitting"
+          "name" : "1. File to be splitted"
         }
       },
       "tags" : [
@@ -72,12 +67,7 @@
           "map" : {
             "param.demo" : "com.axonivy.connector.idp.demo.Demo.SPLITTING_DOCUMENT",
             "param.workflowId" : "in.workflowId"
-          },
-          "code" : [
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"1. File to be splitted\"); "
-          ]
+          }
         },
         "output" : {
           "map" : {
@@ -91,7 +81,7 @@
         "at" : { "x" : 407, "y" : 416 }
       },
       "connect" : [
-        { "id" : "f17", "to" : "f6" }
+        { "id" : "f17", "to" : "f52" }
       ]
     }, {
       "id" : "f6",
@@ -103,20 +93,15 @@
           "map" : {
             "param.processingId" : "in.processingId",
             "param.workflowType" : "com.axonivy.connector.idp.connector.WorkflowType.DOCUMENT_SPLITTING"
-          },
-          "code" : [
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"2. Document Splitting\"); "
-          ]
+          }
         }
       },
       "visual" : {
-        "at" : { "x" : 584, "y" : 416 },
+        "at" : { "x" : 695, "y" : 416 },
         "size" : { "width" : 136, "height" : 62 }
       },
       "connect" : [
-        { "id" : "f7", "to" : "f27" }
+        { "id" : "f7", "to" : "f54" }
       ]
     }, {
       "id" : "f13",
@@ -130,6 +115,9 @@
         },
         "request" : {
           "name" : "Document Extraction"
+        },
+        "task" : {
+          "name" : "1. File selection"
         }
       },
       "tags" : [
@@ -155,17 +143,11 @@
             "param.processingId" : "in.processingId",
             "param.resultNode" : "in.processingResultNode",
             "param.sampleFile" : "in.sampleFile"
-          },
-          "code" : [
-            "// set taskname",
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"3. Extraction Result\");"
-          ]
+          }
         }
       },
       "visual" : {
-        "at" : { "x" : 952, "y" : 695 },
+        "at" : { "x" : 1144, "y" : 695 },
         "size" : { "width" : 124, "height" : 63 }
       },
       "connect" : [
@@ -175,7 +157,7 @@
       "id" : "f20",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 1479, "y" : 696 }
+        "at" : { "x" : 1671, "y" : 696 }
       }
     }, {
       "id" : "f33",
@@ -190,16 +172,11 @@
           "map" : {
             "param.processingId" : "in.processingId",
             "param.workflowType" : "com.axonivy.connector.idp.connector.WorkflowType.EXTRACTION"
-          },
-          "code" : [
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"2. Extraction\"); "
-          ]
+          }
         }
       },
       "visual" : {
-        "at" : { "x" : 584, "y" : 696 },
+        "at" : { "x" : 696, "y" : 696 },
         "size" : { "width" : 136, "height" : 62 },
         "description" : [
           "Open ",
@@ -208,7 +185,7 @@
         ]
       },
       "connect" : [
-        { "id" : "f26", "to" : "f9" }
+        { "id" : "f26", "to" : "f50" }
       ]
     }, {
       "id" : "f9",
@@ -232,7 +209,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 775, "y" : 695 },
+        "at" : { "x" : 959, "y" : 695 },
         "size" : { "width" : 127, "height" : 63 }
       },
       "connect" : [
@@ -248,12 +225,7 @@
           "map" : {
             "param.demo" : "com.axonivy.connector.idp.demo.Demo.EXTRACTION",
             "param.workflowId" : "in.workflowId"
-          },
-          "code" : [
-            "// set taskname",
-            "import com.axonivy.connector.idp.demo.IDPDemoService;",
-            "IDPDemoService.setDemoTaskName(\"1. File selection\");"
-          ]
+          }
         },
         "output" : {
           "map" : {
@@ -269,7 +241,7 @@
         "at" : { "x" : 408, "y" : 696 }
       },
       "connect" : [
-        { "id" : "f14", "to" : "f33" }
+        { "id" : "f14", "to" : "f48" }
       ]
     }, {
       "id" : "f34",
@@ -304,7 +276,7 @@
       "name" : "Load Workflows",
       "config" : {
         "target" : {
-          "clientId" : "IDP-Document-Capturing-API",
+          "clientId" : "IDP",
           "path" : "/processing/workflows",
           "templateParams" : {
             "processing_id" : ""
@@ -375,7 +347,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 776, "y" : 415 },
+        "at" : { "x" : 959, "y" : 415 },
         "size" : { "width" : 127, "height" : 63 }
       },
       "connect" : [
@@ -417,7 +389,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1351, "y" : 415 },
+        "at" : { "x" : 1543, "y" : 415 },
         "size" : { "width" : 127, "height" : 63 }
       },
       "connect" : [
@@ -443,7 +415,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1350, "y" : 695 },
+        "at" : { "x" : 1542, "y" : 695 },
         "size" : { "width" : 127, "height" : 63 }
       },
       "connect" : [
@@ -466,7 +438,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1152, "y" : 416 },
+        "at" : { "x" : 1344, "y" : 416 },
         "size" : { "width" : 160, "height" : 62 }
       },
       "connect" : [
@@ -489,11 +461,71 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1152, "y" : 696 },
+        "at" : { "x" : 1344, "y" : 696 },
         "size" : { "width" : 160, "height" : 62 }
       },
       "connect" : [
         { "id" : "f15", "to" : "f12" }
+      ]
+    }, {
+      "id" : "f48",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "2. Extraction",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 536, "y" : 696 }
+      },
+      "connect" : [
+        { "id" : "f49", "to" : "f33", "color" : "default" }
+      ]
+    }, {
+      "id" : "f50",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "3. Extraction Result",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 832, "y" : 696 }
+      },
+      "connect" : [
+        { "id" : "f51", "to" : "f9", "color" : "default" }
+      ]
+    }, {
+      "id" : "f52",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "2. Document Splitting",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 535, "y" : 416 }
+      },
+      "connect" : [
+        { "id" : "f53", "to" : "f6", "color" : "default" }
+      ]
+    }, {
+      "id" : "f54",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "3. Splitting Result",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 832, "y" : 416 }
+      },
+      "connect" : [
+        { "id" : "f55", "to" : "f27", "color" : "default" }
       ]
     } ]
 }

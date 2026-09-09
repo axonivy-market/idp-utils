@@ -35,6 +35,7 @@
     "modifiers" : [ ]
   }, {
     "name" : "error",
+    "type" : "ch.ivyteam.ivy.bpm.error.BpmError",
     "modifiers" : [ ]
   }, {
     "name" : "retry",

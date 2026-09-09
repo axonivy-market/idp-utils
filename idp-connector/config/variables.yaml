@@ -2,7 +2,7 @@
 Variables:
   idpConnector:
     # The proxy server URL
-    apiProxyUrl: https://idp.api.axonivy.com
+    apiProxyUrl: https://idp.api.axonivy.com/api
     # API Key for "IDP Document Capturing API"
     #[password]
     apiKeySecret: ${decrypt:}
