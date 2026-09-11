@@ -1,58 +1,42 @@
 package com.axonivy.connector.idp.test;
 
-import static com.axonivy.utils.e2etest.enums.E2EEnvironment.REAL_SERVER;
-
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.idp.test.constants.IdpTestConstants;
+import static com.axonivy.utils.e2etest.enums.E2EEnvironment.REAL_SERVER;
 import com.axonivy.utils.e2etest.utils.E2ETestUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.AppFixture;
-import ch.ivyteam.ivy.rest.client.RestClient;
-import ch.ivyteam.ivy.rest.client.RestClients;
 
 public abstract class BaseSetup {
-	protected static final String CLIENT_NAME = "IDP-Document-Capturing-API";
-	protected boolean isRealTest;
 
-	@BeforeEach
-	void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
-		isRealTest = context.getDisplayName().equals(REAL_SERVER.getDisplayName());
-		E2ETestUtils.determineConfigForContext(context.getDisplayName(), runRealEnv(fixture), runMockEnv(fixture, app));
-	}
+    protected static final String CLIENT_ID = "IDP";
+    protected boolean isRealTest;
 
-	private Runnable runRealEnv(AppFixture fixture) {
-		return () -> {
-			String apiKeySecret = System.getProperty(IdpTestConstants.API_KEY_SECRET);
-			fixture.var("idpConnector.apiKeySecret", apiKeySecret);
-		};
-	}
+    @BeforeEach
+    void beforeEach(ExtensionContext context, AppFixture fixture) {
+        isRealTest = context.getDisplayName().equals(REAL_SERVER.getDisplayName());
+        E2ETestUtils.determineConfigForContext(context.getDisplayName(), runRealEnv(fixture), runMockEnv(fixture));
+    }
 
-	private Runnable runMockEnv(AppFixture fixture, IApplication app) {
-		return () -> {
-			fixture.var("idpConnector.apiProxyUrl", "TESTHOSTURL");
-			fixture.var("idpConnector.apiKeySecret", "TESTKEY");
-			fixture.var("idpConnector.waitFor", "120");
-			RestClient restClient = RestClients.of(app).find(CLIENT_NAME);
+    private Runnable runRealEnv(AppFixture fixture) {
+        return () -> {
+            String apiKeySecret = System.getProperty(IdpTestConstants.API_KEY_SECRET);
+            fixture.var("idpConnector.apiKeySecret", apiKeySecret);
+        };
+    }
 
-			restClient = restClient.toBuilder()
-				.uri("http://{ivy.engine.host}:{ivy.engine.http.port}/{ivy.request.application}/api/idpMock")
-				.description(restClient.description()).properties(restClient.properties())
-				.features(List.of())
-				.toRestClient();
-
-			RestClients.of(app).set(restClient);
-		};
-	}
-
-	@AfterEach
-	void afterEach(AppFixture fixture, IApplication app) {
-		RestClients clients = RestClients.of(app);
-		clients.remove(CLIENT_NAME);
-	}
+    private Runnable runMockEnv(AppFixture fixture) {
+        return () -> {
+            fixture.var("idpConnector.apiProxyUrl", "TESTHOSTURL");
+            fixture.var("idpConnector.apiKeySecret", "TESTKEY");
+            fixture.var("idpConnector.waitFor", "120");
+            fixture.config("RestClients." + CLIENT_ID + ".Url",
+                    "http://{ivy.engine.host}:{ivy.engine.http.port}/{ivy.request.application}/api/idpMock");
+            fixture.config("RestClients." + CLIENT_ID + ".Features", List.of());
+        };
+    }
 }

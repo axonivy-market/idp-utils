@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://json-schema.axonivy.com/14.0-dev/config/rest-clients-1.json
+# yaml-language-server: $schema=https://json-schema.axonivy.com/14.0-dev/config/rest-clients-2.json
 RestClients:
-  IDP-Document-Capturing-API:
-    UUID: c316f4d1-daa6-4ca2-b3e0-68133e54eb99
+  IDP:
+    Name: IDP-Document-Capturing-API
     Url: ${ivy.var.idpConnector.apiProxyUrl}
     Icon: res:/webContent/icons/BlueFilesIcon.png
     Features:

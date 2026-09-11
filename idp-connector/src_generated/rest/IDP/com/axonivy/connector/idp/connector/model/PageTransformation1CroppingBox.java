@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * If the page was cropped, the coordinates represent the cropped part on the original page-image.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
 public class PageTransformation1CroppingBox {
   @JsonProperty("original_page_nr")
   private Integer originalPageNr = null;

@@ -2,7 +2,6 @@ package com.axonivy.connector.idp.demo.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,12 +13,12 @@ import com.axonivy.connector.idp.connector.model.StringExtraction;
 import com.axonivy.connector.idp.connector.model.SubDocument1;
 import com.axonivy.connector.idp.demo.dto.Extraction;
 import com.axonivy.connector.idp.demo.dto.SubDocument;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.ivyteam.ivy.environment.Ivy;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
+
 import static com.axonivy.connector.idp.connector.utils.Constants.EXTRACTIONS;
 
 public class IDPDemoUtils {
@@ -28,17 +27,21 @@ public class IDPDemoUtils {
 	private static final String LINEITEM = "line_item";
 	private static final String LINEITEMS = "line_items";
 
-	public static List<SubDocument> toSubDocumentList(JsonNode json)
-			throws JsonProcessingException, IllegalArgumentException {
+	private static final JsonMapper MAPPER = JsonMapper.builder()
+			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+			.disable(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES)
+			.build();
+
+	/**
+	 * Maps a splitting result into the demo sub document list.
+	 *
+	 * @throws IllegalArgumentException when the json has no document_splitting
+	 */
+	public static List<SubDocument> toSubDocumentList(JsonNode json) {
 		if (!json.has("document_splitting")) {
 			throw new IllegalArgumentException("No document_splitting in response.");
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
-
-		GenericSplittingProcessingCompleted processingCompleted = mapper.treeToValue(json,
+		GenericSplittingProcessingCompleted processingCompleted = MAPPER.treeToValue(json,
 				GenericSplittingProcessingCompleted.class);
 		return toSubDocumentList(processingCompleted);
 	}
@@ -69,8 +72,12 @@ public class IDPDemoUtils {
 		return subDocuments;
 	}
 
-	public static List<Extraction> toExactionList(JsonNode jsonNode)
-			throws JsonProcessingException, IllegalArgumentException {
+	/**
+	 * Maps the extractions of a processing result into the demo extraction list.
+	 *
+	 * @throws IllegalArgumentException when the json has no document_type
+	 */
+	public static List<Extraction> toExactionList(JsonNode jsonNode) {
 		JsonNode extractionNode = jsonNode;
 		if (jsonNode.has(EXTRACTIONS)) {
 			extractionNode = jsonNode.get(EXTRACTIONS);
@@ -79,11 +86,6 @@ public class IDPDemoUtils {
 			throw new IllegalArgumentException("No document_type in json.");
 		}
 		List<Extraction> extractions = new ArrayList<>();
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
 
 		for (Entry<String, JsonNode> field : extractionNode.properties()) {
 			if (field.getValue() == null) {
@@ -94,7 +96,7 @@ public class IDPDemoUtils {
 				stringExtractionNode = field.getValue().get(NAME);
 			}
 			if (stringExtractionNode.has(VALUE)) {
-				StringExtraction stringExtraction = mapper.treeToValue(stringExtractionNode, StringExtraction.class);
+				StringExtraction stringExtraction = MAPPER.treeToValue(stringExtractionNode, StringExtraction.class);
 				extractions.add(new Extraction(field.getKey(), stringExtraction));
 			}
 		}
@@ -102,21 +104,16 @@ public class IDPDemoUtils {
 	}
 
 	/**
-	 * get list header title
-	 * 
-	 * @param jsonNode
-	 * @param onlyNoNull : get the header which all value is not null
-	 * @return
-	 * @throws JsonProcessingException
-	 * @throws IllegalArgumentException
+	 * Returns the line item table headers, taken from the first line item.
+	 *
+	 * @param onlyNoNull keep only headers whose value is not null
 	 */
-	public static List<String> extractLineItemHeader(JsonNode jsonNode, boolean onlyNoNull)
-			throws JsonProcessingException, IllegalArgumentException {
+	public static List<String> extractLineItemHeader(JsonNode jsonNode, boolean onlyNoNull) {
 		String lineitemKey = getLineItemKey(jsonNode);
 
 		if (lineitemKey == null) {
 			Ivy.log().warn("No line_item or line_items in json.");
-			return new ArrayList<String>();
+			return new ArrayList<>();
 		}
 
 		List<String> header = new ArrayList<>();
@@ -124,9 +121,7 @@ public class IDPDemoUtils {
 			return header;
 		}
 		JsonNode lineItem = jsonNode.get(lineitemKey).get(0);
-		Iterator<String> fieldNameIterator = lineItem.fieldNames();
-		while (fieldNameIterator.hasNext()) {
-			String fieldName = fieldNameIterator.next();
+		for (String fieldName : lineItem.propertyNames()) {
 			if (!onlyNoNull || lineItem.get(fieldName).has(VALUE)) {
 				header.add(fieldName);
 			}
@@ -145,7 +140,8 @@ public class IDPDemoUtils {
 		return lineitemKey;
 	}
 
-	public static List<Map<String, String>> extractLineItems(JsonNode jsonNode) throws JsonProcessingException {
+	/** Returns the line item rows as field name to value maps. */
+	public static List<Map<String, String>> extractLineItems(JsonNode jsonNode) {
 		String lineitemKey = getLineItemKey(jsonNode);
 
 		if (lineitemKey == null) {
@@ -157,7 +153,7 @@ public class IDPDemoUtils {
 			Map<String, String> map = new HashMap<>();
 			for (Entry<String, JsonNode> field : itemNode.properties()) {
 				if (field.getValue() != null && field.getValue().has(VALUE)) {
-					map.put(field.getKey(), field.getValue().get(VALUE).asText());
+					map.put(field.getKey(), field.getValue().get(VALUE).asString());
 				}
 			}
 			lineitems.add(map);

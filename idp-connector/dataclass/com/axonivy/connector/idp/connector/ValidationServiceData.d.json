@@ -1,0 +1,25 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "ValidationServiceData",
+  "namespace" : "com.axonivy.connector.idp.connector",
+  "fields" : [ {
+    "name" : "processingId",
+    "type" : "java.util.UUID",
+    "modifiers" : [ ]
+  }, {
+    "name" : "confidenceMinValue",
+    "type" : "Double",
+    "modifiers" : [ ]
+  }, {
+    "name" : "confidencePassed",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  }, {
+    "name" : "jsonNode",
+    "type" : "tools.jackson.databind.JsonNode",
+    "modifiers" : [ ]
+  }, {
+    "name" : "error",
+    "modifiers" : [ ]
+  } ]
+}

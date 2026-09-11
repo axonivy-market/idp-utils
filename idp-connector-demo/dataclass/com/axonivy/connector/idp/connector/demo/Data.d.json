@@ -1,0 +1,49 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "Data",
+  "namespace" : "com.axonivy.connector.idp.connector.demo",
+  "fields" : [ {
+    "name" : "workflowId"
+  }, {
+    "name" : "statusCode",
+    "type" : "Integer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "file",
+    "type" : "java.io.File",
+    "modifiers" : [ ]
+  }, {
+    "name" : "processingId",
+    "type" : "java.util.UUID"
+  }, {
+    "name" : "sharingUrl",
+    "comment" : "Sharing URL from share token, documentId",
+    "modifiers" : [ ]
+  }, {
+    "name" : "processingResultNode",
+    "type" : "tools.jackson.databind.JsonNode",
+    "modifiers" : [ ]
+  }, {
+    "name" : "subDocuments",
+    "type" : "java.util.List<com.axonivy.connector.idp.connector.model.SubDocument>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "docShareToken",
+    "modifiers" : [ ]
+  }, {
+    "name" : "workflows",
+    "type" : "java.util.List<com.axonivy.connector.idp.connector.model.AvailableWorkflowResponse>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "confidenceMinValue",
+    "type" : "Double",
+    "modifiers" : [ ]
+  }, {
+    "name" : "error",
+    "type" : "ch.ivyteam.ivy.bpm.error.BpmError",
+    "modifiers" : [ ]
+  }, {
+    "name" : "sampleFile",
+    "type" : "com.axonivy.connector.idp.demo.SampleFile"
+  } ]
+}

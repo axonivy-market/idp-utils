@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * DataAccessSchemasSalesOrderSalesOrderV1LineItem
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-11-12T09:36:24.744976100+07:00[Asia/Bangkok]")
 public class DataAccessSchemasSalesOrderSalesOrderV1LineItem {
   @JsonProperty("pos_id")
   private StringExtraction2 posId = null;

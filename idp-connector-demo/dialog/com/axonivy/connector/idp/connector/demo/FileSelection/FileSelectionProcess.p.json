@@ -1,0 +1,272 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "id" : "19221E6F3F64EA42",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "com.axonivy.connector.idp.connector.demo.FileSelection.FileSelectionData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start(Demo,String,JsonNode,UUID)",
+      "config" : {
+        "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "demo", "type" : "com.axonivy.connector.idp.demo.Demo", "desc" : "" },
+            { "name" : "workflowId", "type" : "String", "desc" : "" },
+            { "name" : "processingResultNode", "type" : "tools.jackson.databind.JsonNode", "desc" : "" },
+            { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" }
+          ],
+          "map" : {
+            "out.demo" : "param.demo",
+            "out.workflowId" : "param.workflowId"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "file", "type" : "java.io.File", "desc" : "" },
+            { "name" : "selectedFile", "type" : "com.axonivy.connector.idp.demo.SampleFile", "desc" : "" },
+            { "name" : "processingId", "type" : "java.util.UUID", "desc" : "" },
+            { "name" : "processingResultNode", "type" : "tools.jackson.databind.JsonNode", "desc" : "" }
+          ],
+          "map" : {
+            "result.file" : "in.selectedSampleFile.getFile().getJavaFile()",
+            "result.selectedFile" : "in.selectedSampleFile",
+            "result.processingId" : "in.processingId",
+            "result.processingResultNode" : "in.processingResultNode"
+          }
+        },
+        "guid" : "19221E6F3FB595E2"
+      },
+      "visual" : {
+        "at" : { "x" : 32, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "proceed",
+      "config" : {
+        "guid" : "19221E6F42C59C6F"
+      },
+      "visual" : {
+        "at" : { "x" : 32, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 584, "y" : 280 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "Script",
+      "name" : "init",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.util.Arrays;",
+            "import com.axonivy.connector.idp.demo.SampleFile;",
+            "in.sampleFiles = SampleFile.getDemo(in.demo);",
+            "in.selectedSampleFile = in.sampleFiles.get(0);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f18",
+      "type" : "Script",
+      "name" : "Show error message or retry",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.idp.connector.exception.RestException;",
+            "import jakarta.faces.application.FacesMessage;",
+            "import org.primefaces.component.inputtext.InputText;",
+            "import jakarta.faces.context.FacesContext;",
+            "",
+            "if (in.error.getErrorCode().equals(\"idp:error\")) {",
+            "    RestException exception = in.error.getCause() as RestException;",
+            "    ivy.log.info(\"exception status code {0}\", exception.getStatusCode());",
+            "    if (exception.getStatusCode() == 429 && in.retryTime < 3) {",
+            "        in.retry = true;",
+            "        in.retryTime++;",
+            "    } else {",
+            "        in.retry = false;",
+            "        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, exception.getMessage(), null));",
+            "    }",
+            "} else {",
+            "    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, in.error.getErrorMessage(), null));",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 448, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f11", "to" : "f23" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 192, "y" : 280 }
+      }
+    }, {
+      "id" : "f14",
+      "type" : "SubProcessCall",
+      "name" : "Extract file",
+      "config" : {
+        "processCall" : "ProcessingService:processing(String,java.io.File)",
+        "call" : {
+          "map" : {
+            "param.workfowId" : "in.workflowId",
+            "param.file" : "in.selectedSampleFile.getFile().getJavaFile()"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.error" : "result.#error",
+            "out.processingId" : "result.#processingId",
+            "out.processingResultNode" : "result.#processingResult"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 464 },
+        "size" : { "width" : 120 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f44",
+      "type" : "SubProcessCall",
+      "name" : "Splitting file",
+      "config" : {
+        "processCall" : "ProcessingService:processing(String,java.io.File)",
+        "call" : {
+          "map" : {
+            "param.workfowId" : "in.workflowId",
+            "param.file" : "in.selectedSampleFile.getFile().getJavaFile()"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.error" : "result.#error",
+            "out.processingId" : "result.#processingId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 176 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f15" : "in.sampleFiles.size() == 1"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 112, "y" : 280 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f44", "via" : [ { "x" : 112, "y" : 176 } ] },
+        { "id" : "f16", "to" : "f14", "via" : [ { "x" : 112, "y" : 464 } ] }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f20" : "in.#error == null"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 448, "y" : 176 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f4", "via" : [ { "x" : 584, "y" : 176 } ], "color" : "default" },
+        { "id" : "f21", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f10" : "in.#error == null"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 448, "y" : 464 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f4", "via" : [ { "x" : 584, "y" : 464 } ], "color" : "default" },
+        { "id" : "f22", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f23",
+      "type" : "Alternative",
+      "name" : "retry?",
+      "config" : {
+        "conditions" : {
+          "f24" : "in.retry",
+          "f25" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 280 },
+        "labelOffset" : { "y" : -16 }
+      },
+      "connect" : [
+        { "id" : "f25", "to" : "f9" },
+        { "id" : "f24", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "Script",
+      "name" : "delay 2s",
+      "config" : {
+        "output" : {
+          "code" : [
+            "Thread.sleep(2000);",
+            "in.retry = false;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 360 }
+      },
+      "connect" : [
+        { "id" : "f27", "to" : "f14", "color" : "default" }
+      ]
+    } ]
+}

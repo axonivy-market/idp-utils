@@ -21,11 +21,6 @@ body .container {
 	padding: 0px !important;
 }
 
-.ui-selectoneradio label {
-	padding-left: 3px;
-	float: none !important;
-}
-
 .linkText {
 	font-size: 14px !important; 
 	text-decoration: underline !important;	

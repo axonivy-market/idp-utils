@@ -1,6 +1,6 @@
 package com.axonivy.connector.idp.connector.utils;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import com.axonivy.connector.idp.connector.exception.RestException;
 

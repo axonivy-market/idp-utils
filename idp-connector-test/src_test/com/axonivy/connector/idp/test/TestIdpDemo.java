@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.axonivy.utils.e2etest.context.MultiEnvironmentContextProvider;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
 import ch.ivyteam.ivy.bpm.engine.client.ExecutionResult;
 import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
@@ -18,7 +17,7 @@ import ch.ivyteam.ivy.security.ISession;
 public class TestIdpDemo extends BaseSetup {
 
 	@TestTemplate
-	public void testOrganizations(BpmClient bpmClient, ISession session, AppFixture fixture, IApplication app) {
+	public void testOrganizations(BpmClient bpmClient, ISession session, AppFixture fixture) {
 		ExecutionResult result = bpmClient.start().process("IDPDemo/workflows.ivp").execute();
 		com.axonivy.connector.idp.connector.demo.Data data = result.data().last();
 		assertThat(data.getWorkflows()).isNotEmpty();

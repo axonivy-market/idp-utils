@@ -1,0 +1,41 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "SplittingResultData",
+  "namespace" : "com.axonivy.connector.idp.connector.demo.SplittingResult",
+  "fields" : [ {
+    "name" : "processingId",
+    "type" : "java.util.UUID",
+    "modifiers" : [ ]
+  }, {
+    "name" : "subDocuments",
+    "type" : "java.util.List<com.axonivy.connector.idp.demo.dto.SubDocument>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "file",
+    "type" : "java.io.File",
+    "modifiers" : [ ]
+  }, {
+    "name" : "subDocument",
+    "type" : "com.axonivy.connector.idp.connector.model.SubDocument",
+    "modifiers" : [ ]
+  }, {
+    "name" : "streamedContent",
+    "type" : "org.primefaces.model.StreamedContent",
+    "modifiers" : [ ]
+  }, {
+    "name" : "prettyJson",
+    "modifiers" : [ ]
+  }, {
+    "name" : "processingResult",
+    "type" : "tools.jackson.databind.JsonNode",
+    "modifiers" : [ ]
+  }, {
+    "name" : "genericSplitting",
+    "type" : "com.axonivy.connector.idp.connector.model.GenericSplittingProcessingCompleted",
+    "modifiers" : [ ]
+  }, {
+    "name" : "selectedSubDocumentIndex",
+    "type" : "Integer",
+    "modifiers" : [ ]
+  } ]
+}
