@@ -13,6 +13,7 @@ RestClients:
       JSON.Deserialization.FAIL_ON_UNKNOWN_PROPERTIES: 'false'
       JSON.Deserialization.FAIL_ON_INVALID_SUBTYPE: 'false'
       JSON.Deserialization.FAIL_ON_IGNORED_PROPERTIES: 'false'
+      jersey.config.client.readTimeout: ${ivy.var.idpConnector.apiTimeout}
     OpenAPI:
       Namespace: com.axonivy.connector.idp.connector.model
       ResolveFully: true

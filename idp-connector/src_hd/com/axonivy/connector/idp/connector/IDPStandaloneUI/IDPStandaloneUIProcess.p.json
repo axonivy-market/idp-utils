@@ -28,7 +28,7 @@
             "  out.workflowType = WorkflowType.EXTRACTION;",
             "}",
             "",
-            "out.apiProxyUrl = ivy.var.get(\"idpConnector.apiProxyUrl\");"
+            "out.apiProxyUrl = ivy.var.get(\"idpConnector.standAloneUrl\");"
           ]
         },
         "guid" : "19231D0DEDB737C1"

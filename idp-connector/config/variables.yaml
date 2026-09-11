@@ -13,3 +13,5 @@ Variables:
     confidenceMinValue: "0.8"
     # Stand alone URL
     standAloneUrl: ""
+    # API timeout in milliseconds. Default is 0 (infinity).
+    apiTimeout: "0"
