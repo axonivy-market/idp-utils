@@ -8,7 +8,7 @@ import jakarta.ws.rs.client.ClientRequestFilter;
 import jakarta.ws.rs.core.Feature;
 import jakarta.ws.rs.core.FeatureContext;
 
-import ch.ivyteam.ivy.rest.client.FeatureConfig;
+import ch.ivyteam.ivy.rest.client.feature.FeatureConfig;
 
 public class IDPAuthFeature implements Feature {
 
@@ -22,7 +22,7 @@ public class IDPAuthFeature implements Feature {
 
 		@Override
 		public void filter(ClientRequestContext ctxt) throws IOException {
-			var config = new FeatureConfig(ctxt.getConfiguration(), IDPAuthFeature.class);
+			var config = FeatureConfig.of(ctxt.getConfiguration(), IDPAuthFeature.class);
 			String key = config.readMandatory("AUTH.apiKey");
 			ctxt.getHeaders().putSingle("Authorization", "ApiKey " + key);
 			ctxt.getHeaders().putSingle("X-Requested-By", "ivy");
