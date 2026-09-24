@@ -31,7 +31,7 @@ public class TestIdpDemo {
 
 	@BeforeEach
 	private void prepareRestClient(IApplication app, AppFixture fixture) {
-		fixture.var("idpConnector.apiProxyUrl", "{ivy.app.baseurl}/api/idpMock");
+		fixture.var("idpConnector.apiUrl", "{ivy.app.baseurl}/api/idpMock");
 		fixture.var("idpConnector.apiKeySecret", "TESTKEY");
 		fixture.var("idpConnector.waitFor", "120");
 		RestClient restClient = RestClients.of(app).find(UUID.fromString(REST_UUID));
