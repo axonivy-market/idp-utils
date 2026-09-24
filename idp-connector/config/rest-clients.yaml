@@ -2,7 +2,7 @@
 RestClients:
   IDP (Document Capturing API):
     UUID: c316f4d1-daa6-4ca2-b3e0-68133e54eb99
-    Url: ${ivy.var.idpConnector.apiProxyUrl}
+    Url: ${ivy.var.idpConnector.apiUrl}
     Icon: res:/webContent/icons/BlueFilesIcon.png
     Features:
     - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
