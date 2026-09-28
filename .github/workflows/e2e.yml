@@ -12,5 +12,8 @@ permissions:
 jobs:
   build:
     uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
+    with:
+      javaVersion: 25
+      ivyJavaHome: $JAVA_HOME_25_X64
     secrets:
       mvnArgs: -Didp.apiKeySecret=${{secrets.API_KEY_SECRET}} -DtestEnvironment=E2E
