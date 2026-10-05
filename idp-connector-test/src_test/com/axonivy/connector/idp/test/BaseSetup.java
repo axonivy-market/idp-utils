@@ -1,12 +1,13 @@
 package com.axonivy.connector.idp.test;
 
+import static com.axonivy.utils.e2etest.enums.E2EEnvironment.REAL_SERVER;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.idp.test.constants.IdpTestConstants;
-import static com.axonivy.utils.e2etest.enums.E2EEnvironment.REAL_SERVER;
 import com.axonivy.utils.e2etest.utils.E2ETestUtils;
 
 import ch.ivyteam.ivy.environment.AppFixture;
@@ -31,7 +32,7 @@ public abstract class BaseSetup {
 
     private Runnable runMockEnv(AppFixture fixture) {
         return () -> {
-            fixture.var("idpConnector.apiProxyUrl", "TESTHOSTURL");
+            fixture.var("idpConnector.apiUrl", "TESTHOSTURL");
             fixture.var("idpConnector.apiKeySecret", "TESTKEY");
             fixture.var("idpConnector.waitFor", "120");
             fixture.config("RestClients." + CLIENT_ID + ".Url",

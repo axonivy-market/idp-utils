@@ -19,7 +19,7 @@
     "name" : "sharingUrl",
     "modifiers" : [ ]
   }, {
-    "name" : "apiProxyUrl",
+    "name" : "apiUrl",
     "modifiers" : [ ]
   } ]
 }
