@@ -25,7 +25,7 @@
 		<script type="text/javascript">
 			function idpSubmit() {
 				const frame = document.getElementById("#{cc.id}IdpFrame");
-				frame.contentWindow.postMessage("save-document", '#{data.apiProxyUrl}');
+				frame.contentWindow.postMessage("save-document", '#{data.apiUrl}');
 			};
 			// Define the saving form data function. To call it: PF('{widgetvar}').save()
 			$(document).ready(function() {

@@ -21,7 +21,7 @@
     "type" : "String",
     "modifiers" : [ "PERSISTENT" ]
   }, {
-    "name" : "apiProxyUrl",
+    "name" : "apiUrl",
     "type" : "String",
     "modifiers" : [ "PERSISTENT" ]
   } ]

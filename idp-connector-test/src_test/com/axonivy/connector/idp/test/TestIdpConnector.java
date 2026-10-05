@@ -19,7 +19,7 @@ public class TestIdpConnector {
 	
 	@BeforeEach
 	protected void prepareRestClient(IApplication app, AppFixture fixture) {
-		fixture.var("idpConnector.apiProxyUrl", "TESTHOSTURL");
+		fixture.var("idpConnector.apiUrl", "TESTHOSTURL");
 		fixture.var("idpConnector.apiKeySecret", "TESTKEY");
 		fixture.var("idpConnector.waitFor", "120");
 		RestClient restClient = RestClients.of(app).find(UUID.fromString(REST_UUID));
