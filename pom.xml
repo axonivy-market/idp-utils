@@ -1,23 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.axonivy.utils.idp</groupId>
-	<name>idp-utils</name>
-	<artifactId>idp-utils-modules</artifactId>
-	<version>13.2.2-SNAPSHOT</version>
+	<groupId>com.axonivy.connector.idp</groupId>
+	<name>idp-connector</name>
+	<artifactId>idp-connector-modules</artifactId>
+	<version>14.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<modules>
-		<module>idp-utils</module>
-		<module>idp-utils-demo</module>
-		<module>idp-utils-test</module>
-		<module>idp-utils-product</module>
+		<module>idp-connector</module>
+		<module>idp-connector-demo</module>
+		<module>idp-connector-test</module>
+		<module>idp-connector-product</module>
 	</modules>
 
 	<scm>
 		<developerConnection>
-			scm:git:https://github.com/axonivy-market/idp-utils.git</developerConnection>
+			scm:git:https://github.com/axonivy-market/idp-connector.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 

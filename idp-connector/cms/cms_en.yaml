@@ -1,0 +1,8 @@
+Dialogs:
+  com:
+    axonivy:
+      connector:
+        idp:
+          connector:
+            IDPStandaloneUI:
+              ErrorMessage: Error when getting the sharing url

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://json-schema.axonivy.com/14.0/config/rest-clients.json
+RestClients:
+  IDP:
+    Name: IDP-Document-Capturing-API
+    Url: ${ivy.var.idpConnector.apiUrl}
+    Icon: res:/webContent/icons/BlueFilesIcon.png
+    Features:
+      - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+      - org.glassfish.jersey.media.multipart.MultiPartFeature
+      - com.axonivy.connector.idp.connector.auth.IDPAuthFeature
+    Properties:
+      AUTH.apiKey: ${ivy.var.idpConnector.apiKeySecret}
+      JSON.Deserialization.FAIL_ON_UNKNOWN_PROPERTIES: 'false'
+      JSON.Deserialization.FAIL_ON_INVALID_SUBTYPE: 'false'
+      JSON.Deserialization.FAIL_ON_IGNORED_PROPERTIES: 'false'
+      jersey.config.client.readTimeout: ${ivy.var.idpConnector.apiTimeout}
+    OpenAPI:
+      Namespace: com.axonivy.connector.idp.connector.model
+      ResolveFully: true

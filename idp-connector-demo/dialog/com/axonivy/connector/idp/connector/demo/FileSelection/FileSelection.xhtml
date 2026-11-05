@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core"
+  xmlns:h="jakarta.faces.html" xmlns:ui="jakarta.faces.facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="primefaces"
+  xmlns:pe="primefaces.extensions">
+<h:body>
+	<ui:composition template="/layouts/frame-10.xhtml">
+		<ui:define name="title">FileSelection</ui:define>
+		<ui:define name="content">
+			<script>
+				window.isHideTaskName = true;
+				window.isHideTaskAction = true;
+				window.isHideCaseInfo = true;
+			</script>
+			<h:outputStylesheet name="layouts/styles/customStyle.css" />
+			<h:form id="form">
+				<p:messages id="message"/>
+				<p:panelGrid columns="2" layout="grid"
+					styleClass="ui-panelgrid-blank ui-fluid"
+					columnClasses="ui-g-12 ui-md-5 ui-lg-5, ui-g-12 ui-md-7 ui-lg-7">
+					<h:panelGroup>
+						<h:outputText value="Here you can select the document you want to perform the extraction:" rendered="#{data.demo == 'EXTRACTION'}"/>
+						<p:selectOneRadio id="selectFile" value="#{data.selectedSampleFile}"
+						layout="pageDirection" >
+						<f:selectItems value="#{data.sampleFiles}" var="sample" itemLabel="#{sample.getName()}" itemValue="#{sample}"/>
+						<p:ajax update="@form"/>
+					</p:selectOneRadio>
+					</h:panelGroup>
+					<h:panelGroup width="100%" rendered="#{data.selectedSampleFile ne null}">
+						<pe:documentViewer 
+							value="#{data.selectedSampleFile.streamedContent}"
+							style="height:80vh; border: 0;" >
+						</pe:documentViewer>
+					</h:panelGroup>
+				</p:panelGrid>
+				<br />
+				<div class="command-btns">
+					<p:commandLink id="cancel"
+						actionListener="#{ivyWorkflowView.cancel()}" process="@this"
+						value="Cancel" />
+					<p:commandButton id="proceed" actionListener="#{logic.proceed}"
+						value="Proceed" update="form" icon="pi pi-check" />
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
