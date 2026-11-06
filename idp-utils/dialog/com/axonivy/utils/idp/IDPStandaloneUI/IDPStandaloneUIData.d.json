@@ -1,0 +1,25 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "IDPStandaloneUIData",
+  "namespace" : "com.axonivy.utils.idp.IDPStandaloneUI",
+  "fields" : [ {
+    "name" : "workflowType",
+    "type" : "com.axonivy.utils.idp.WorkflowType",
+    "comment" : "the document's workflow type: document-spliting OR extraction",
+    "modifiers" : [ ]
+  }, {
+    "name" : "documentId",
+    "type" : "java.util.UUID",
+    "modifiers" : [ ]
+  }, {
+    "name" : "shareInfo",
+    "type" : "com.axonivy.utils.idp.model.DocShareTokenInfo",
+    "modifiers" : [ ]
+  }, {
+    "name" : "sharingUrl",
+    "modifiers" : [ ]
+  }, {
+    "name" : "apiUrl",
+    "modifiers" : [ ]
+  } ]
+}
