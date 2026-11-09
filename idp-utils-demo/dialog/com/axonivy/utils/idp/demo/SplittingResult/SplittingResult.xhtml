@@ -30,8 +30,7 @@
 							<p:column headerText="Download" width="150px">
 								<p:commandButton value="Download" ajax="false"
 									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="fa fa-download" styleClass="mr-2"
-									update="downloadMessages">
+									icon="fa fa-download" styleClass="mr-2">
 									<p:fileDownload value="#{logic.downloadFile(subdocIndex)}" />
 								</p:commandButton>
 							</p:column>

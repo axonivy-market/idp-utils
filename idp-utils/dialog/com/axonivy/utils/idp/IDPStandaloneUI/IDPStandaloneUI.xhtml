@@ -8,11 +8,11 @@
 	xmlns:p="primefaces"
 	xmlns:pe="primefaces.extensions">
 <cc:interface componentType="IvyComponent">
-    <cc:attribute name="widgetVar" required="true"
+    <cc:attribute name="widgetVar" type="java.lang.String" required="true"
     	shortDescription="widgetvar. Use to save the form data: PF('{widgetvar}').save();"/>
 	<cc:attribute name="style" type="java.lang.String" default="width:100%;height:85vh;border:0;"
 		shortDescription="style for the component itself"/>
-	<cc:attribute name="styleClass" default=""
+	<cc:attribute name="styleClass" type="java.lang.String" default=""
 		shortDescription="styleClasses for the div surrounding the iframe" />
 </cc:interface>
 
